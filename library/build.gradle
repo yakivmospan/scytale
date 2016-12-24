@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 25
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-annotations:25.1.0'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'scytale'
+
+    publishedGroupId = 'com.yakivmospan'
+    libraryName = 'Scytale'
+    libraryArtifact = 'scytale'
+    overridArchivesNameWithLibraryArtifact = true
+
+    libraryDescription =
+            'One tool to manage key generation, key storing and encryption on different APIs of Android.'
+
+    siteUrl = 'https://github.com/yakivmospan/scytale'
+    gitUrl = 'https://github.com/yakivmospan/scytale.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'yakivmospan'
+    developerName = 'Yakiv Mospan'
+    developerEmail = 'yakiv.mospan@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: '../gradle/bintray-setup.gradle'
