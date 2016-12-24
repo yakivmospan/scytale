@@ -122,7 +122,7 @@ String encryptedData = crypto.encrypt(text, key, false);
 String decryptedData = crypto.decrypt(encryptedData, key, false);
 ```
 
-### Download
+## Download
 
 Add dependency to your app `gradle.build` file:
 
@@ -132,7 +132,7 @@ compile 'com.yakivmospan:scytale:1.0.0'
 
 Minimum supported API version is 8.
 
-### License
+## License
 
 ```
 Copyright 2016 Yakiv Mospan
