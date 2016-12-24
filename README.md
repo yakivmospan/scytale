@@ -1,6 +1,6 @@
 # Scytale
 
-[![Download](https://api.bintray.com/packages/yakivmospan/maven/scytale/images/download.svg)](https://bintray.com/yakivmospan/maven/scytale/_latestVersion)
+ [ ![Download](https://api.bintray.com/packages/bintray/jcenter/scytale/images/download.svg) ](https://bintray.com/bintray/jcenter/scytale/_latestVersion)
 
 One tool to manage key generation, key storing and encryption on different APIs of Android.
 
