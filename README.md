@@ -6,11 +6,11 @@ One tool to manage key generation, key storing and encryption on different APIs 
 
 ![](assets/logo.png)
 
-As you may know android provided API to use `keystore` that is stored in system only from API 18. They introduced [AndroidKeyStore](http://developer.android.com/training/articles/keystore.html) provider that is responsible to manage this.
+As you may know Android provides API to use `keystore` that is stored in system only from API 18. They introduced [AndroidKeyStore](http://developer.android.com/training/articles/keystore.html) provider that is responsible for managing this.
 
-But as always there are underwater stones. Up to API 23 you are only able to create asymmetric keys using  `AndroidKeyStore` provider. Also [algorithms](http://developer.android.com/training/articles/keystore.html#SupportedAlgorithms) that you can use are limited. And what about devices below API 18 ?
+But as always there are underwater stones. Up to API 23 you are only able to create asymmetric keys using `AndroidKeyStore` provider. Also [algorithms](http://developer.android.com/training/articles/keystore.html#SupportedAlgorithms) that you can use are limited. And what about devices below API 18?
 
-I've create API that wraps default [JCA](http://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html) api and `AndroidKeyStore` API and makes it easy to create, manage and use your keys on any andorid API.
+I've create API that wraps default [JCA](http://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html) API and `AndroidKeyStore` API and makes it easy to create, manage and use your keys on any Android API.
 
 ## Sample
 
@@ -25,7 +25,7 @@ if (!store.hasKey("test")) {
 // Get key
 SecretKey key = store.getSymmetricKey("test", null);
 
-// Encrypt/Dencrypt data
+// Encrypt/Decrypt data
 Crypto crypto = new Crypto(Options.TRANSFORMATION_SYMMETRIC);
 String text = "Sample text";
 
@@ -38,7 +38,7 @@ Log.i("Scytale", "Decrypted data: " + decryptedData);
 
 ## How it works?
 
-Depending on what key you need and what Android you are using, API will create `keystore` file in application inner cache or will use `AndroidKeyStore` to hold keys. Key generation will be also made with different API. The tables below shows what will be used in different cases.
+Depending on what key you need and what Android you are using, API will create `keystore` file in application inner cache or will use `AndroidKeyStore` to hold keys. Key generation will be also made with different API. The tables below show what will be used in different cases.
 
 In case you want to generate and save `Asymmetric` key
 
@@ -59,22 +59,22 @@ After calling one of `generateKey` methods, key will be automatically stored in 
 
 To store asymmetric `PrivateKey` we need to provide `X509Certificate`. And of course there is no default API to do that.
 
-On `18+` devices its pretty easy, google did it for us.
+On `18+` devices it's pretty easy, Google did it for us.
 
-For  `pre 18`  there is one 3d party library that can create self signed `X509Certificate`. It is called [Bouncy Castle](http://www.bouncycastle.org/) and is available on maven as well. But after some research I found that [Google did copied this library](https://goo.gl/Zcaqpj) to their API but made it private. Why ? Don't ask me..
+For `pre 18` there is one 3rd party library that can create self signed `X509Certificate`. It is called [Bouncy Castle](http://www.bouncycastle.org/) and is available on Maven as well. But after some research I found that [Google copied this library](https://goo.gl/Zcaqpj) to their API but made it private. Why? Don't ask me...
 
-So I decided to make it like this :
+So I decided to make it like this:
 
-- API will try to get  Google Bouncy Castle using reflection (I've checked it on few APIs and it seems to work well)
-- If Google version is missing, API will try to get 3d party Bouncy Castle library.  It will use reflection as well. This gives two advantages:
- - You can add this API for 18+ devices with out any additional libraries
- - You can run this API on pre 18 devices with out any additional libraries as well. And in case if some device will miss google hidden API you will receive an error and then include  Bouncy Castle to project. This is pretty cool if you are getting error on 15 API but your min project API is 16, and there is no errors on it.
+- API will try to get Google Bouncy Castle using reflection (I've checked it on few APIs and it seems to work well)
+- If Google version is missing, API will try to get 3rd party Bouncy Castle library. It will use reflection as well. This has two advantages:
+ - You can add this API for 18+ devices without any additional libraries.
+ - You can run this API on pre 18 devices without any additional libraries as well. And in case some device will miss Google hidden API you will receive an error and then include Bouncy Castle to project. This is pretty cool if you are getting error on 15 API but your min project API is 16, and there is no errors on it.
 
 In general it creates simple interface to work with `Keystore` using API provided by Java and different versions of Android.
 
 ## Extended Usage
 
-Instead of using `generateAsymmetricKey(@NonNull String alias, char[] password)` method you can use ` generateAsymmetricKey(@NonNull KeyProps keyProps)` one, and  define key with specific options.
+Instead of using `generateAsymmetricKey(@NonNull String alias, char[] password)` method you can use ` generateAsymmetricKey(@NonNull KeyProps keyProps)` one, and define key with specific options.
 
 ```java
 // Create store with specific name and password
@@ -107,10 +107,10 @@ KeyProps keyProps = new KeyProps.Builder()
 // Generate KeyPair depending on KeyProps
 KeyPair keyPair = store.generateAsymmetricKey(keyProps);
 
-// Encrypt/Dencrypt data using buffer with or with out Initialisation Vectors
+// Encrypt/Dencrypt data using buffer with or without Initialisation Vectors
 // This additional level of safety is required on 23 API level for
 // some algorithms. Specify encryption/decryption block size to use buffer for
-// large data when using block based algorithms(such as RSA)
+// large data when using block based algorithms (such as RSA)
 
 final int encryptionBlockSize = keysize / 8 - 11; // as specified for RSA/ECB/PKCS1Padding keys
 final int decryptionBlockSize = keysize / 8; // as specified for RSA/ECB/PKCS1Padding keys
@@ -124,7 +124,7 @@ String decryptedData = crypto.decrypt(encryptedData, key, false);
 
 ## Download
 
-Add dependency to your app `gradle.build` file:
+Add dependency to your app `build.gradle` file:
 
 ```java
 compile 'com.yakivmospan:scytale:1.0.0'
