@@ -52,7 +52,7 @@ In case you want to generate and save `Symmetric` key
 
 | API   | Application Keystore | AndroidKeyStore |
 |:-----:|:--------------------:|:---------------:|
-|`< 18` |  `+`                 |                 |
+|`< 23` |  `+`                 |                 |
 |`>= 23`|                      |        `+`      |
 
 After calling one of `generateKey` methods, key will be automatically stored in `keystore`.
