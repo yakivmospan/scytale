@@ -80,8 +80,8 @@ Instead of using `generateAsymmetricKey(@NonNull String alias, char[] password)`
 // Create store with specific name and password
 Store store = new Store(context, STORE_NAME, STORE_PASSWORD);
 
-final int alias = "alias";
-final int password = "password".toCharArray();
+final String alias = "alias";
+final char[] password = "password".toCharArray();
 final int keysize = 512;
 
 final Calendar start = Calendar.getInstance();
