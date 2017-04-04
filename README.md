@@ -127,7 +127,7 @@ String decryptedData = crypto.decrypt(encryptedData, key, false);
 Add dependency to your app `build.gradle` file:
 
 ```java
-compile 'com.yakivmospan:scytale:1.0.0'
+compile 'com.yakivmospan:scytale:1.0.1'
 ```
 
 Minimum supported API version is 8.
