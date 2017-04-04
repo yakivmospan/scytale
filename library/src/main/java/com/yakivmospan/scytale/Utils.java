@@ -4,7 +4,7 @@ import android.os.Build;
 
 final class Utils {
     static final int VERSION = Build.VERSION.SDK_INT;
-    static String TAG = Options.class.getName();
+    static String TAG = "Scytale";
 
     private Utils() {
     }
