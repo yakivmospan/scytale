@@ -8,6 +8,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import javax.crypto.SecretKey;
 
+import static com.yakivmospan.scytale.Constants.*;
 import static com.yakivmospan.scytale.Options.TRANSFORMATION_SYMMETRIC;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
