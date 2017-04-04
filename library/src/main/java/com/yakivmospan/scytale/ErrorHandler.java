@@ -5,6 +5,12 @@ import android.util.Log;
 class ErrorHandler {
     private ErrorListener mErrorListener;
 
+    /**
+     * Use this method to handle errors that may occur while working with this class. Error log with short information
+     * about exception will be printed to log cat even if there is no {@link ErrorListener} specified.
+     *
+     * @param errorListener will be triggered if any error occurs.
+     */
     public void setErrorListener(ErrorListener errorListener) {
         mErrorListener = errorListener;
     }
@@ -14,9 +20,8 @@ class ErrorHandler {
      */
     protected void onException(Exception e) {
         if (BuildConfig.DEBUG) {
-            e.printStackTrace();
+            Log.e(Utils.TAG, Log.getStackTraceString(e));
         } else {
-            Log.e(Utils.TAG, e.getMessage());
             Log.e(Utils.TAG, e.toString());
         }
         if (mErrorListener != null) {
